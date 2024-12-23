@@ -4,7 +4,8 @@ from tkinter import messagebox as msg, filedialog as prompt
 rootDir = os.path.dirname(os.path.abspath(__file__))
 appdataDir = os.path.join(os.getenv('APPDATA'), "Furglitch", "MO2SE")
 tempDir = os.path.join(os.getenv('TEMP'), "Furglitch", "MO2SE")
-iconDir = os.path.join(rootDir, "icon.png")
+resourceDir = os.path.join(rootDir, "resources")
+iconDir = os.path.join(resourceDir, "icon.png")
 saved = True
 categories = {}
 startColor = "#000000"
@@ -103,7 +104,7 @@ def outputGen():
 # Settings Functions
 def themeGet(type, theme=None):
     output = ''
-    with open(os.path.join(rootDir, 'var', 'themes.json')) as f:
+    with open(os.path.join(resourceDir, 'themes.json')) as f:
         data = json.load(f)
         if type == "name":
             output = list(data.keys())
@@ -115,7 +116,7 @@ def themeGet(type, theme=None):
 
 def headerGet(type, header=None):
     output = ''
-    with open(os.path.join(rootDir, 'var', 'headers.json')) as f:
+    with open(os.path.join(resourceDir, 'headers.json')) as f:
         data = json.load(f)
         if type == "name":
             output = list(data.keys())
