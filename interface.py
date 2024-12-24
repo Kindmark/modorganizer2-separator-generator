@@ -164,6 +164,9 @@ def addSeparator(type, name):
     if type == "sub" and parentCategory:
         parentID = bck.categories[parentCategory]["id"]
         separatorList.item(parentID, open=True)
+        newID = bck.categories[parentCategory]["sub"][name]["id"]
+    else: newID = bck.categories[name]["id"]
+    separatorList.selection_set(newID)
 def remSeparator():
     selection = separatorList.selection()
     if selection:
@@ -189,10 +192,7 @@ def moveSeparator(direction):
             separatorList.move(selection, parentID, index - 1)
         elif direction == "down" and index < len(siblings) - 1:
             separatorList.move(selection, parentID, index + 1)
-    updateOrder()
-    separatorList.selection_set(selection.index)
-
-def updateOrder():
+        separatorList.selection_set(selection)
     new_categories = {}
     for category_id in separatorList.get_children():
         category_name = separatorList.item(category_id, "values")[0].strip()
@@ -201,7 +201,6 @@ def updateOrder():
             subcategory_name = separatorList.item(subcategory_id, "values")[0].strip()
             new_categories[category_name]["sub"][subcategory_name] = {"id": subcategory_id}
     bck.categories = new_categories
-    updateList()
 
         
 # Input Frame
