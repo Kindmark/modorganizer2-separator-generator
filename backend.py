@@ -8,6 +8,7 @@ resourceDir = os.path.join(rootDir, "resources")
 iconDir = os.path.join(resourceDir, "icon.png")
 saved = True
 categories = {}
+examples = {}
 startColor = "#000000"
 endColor = "#ffffff"
 gradient = []
@@ -33,17 +34,52 @@ def fileSave():
         json.dump(data, f, sort_keys=True, indent=4)
     global saved; saved = True
         
-def fileOpen():
-    global categories, startColor, endColor
-    path = prompt.askopenfilename(filetypes=[("JSON", "*.json")])
+def fileOpen(path=None):
+    global categories, startColor, endColor, saved
+    if saved != True:
+        if not msg.askyesno("Changes Not Saved", "You've adjusted your separator list but haven't saved! Are you sure you want to open an example?"):
+            return
+        else:
+            categories.clear()
+            startColor = "#000000"
+            endColor = "#ffffff"
+    if path == None:
+        path = prompt.askopenfilename(filetypes=[("JSON", "*.json")])
+    print(path)
     with open(path, "r") as f:
         data = json.load(f)
         categories = data["categories"]
         startColor = data["gradient"]["startColor"]
         endColor = data["gradient"]["endColor"]
-    global saved
     saved = True
 
+def exampleGet(bar, list, subBox, startIndicator, endIndicator, startLabel, endLabel):
+    global examples
+    path = os.path.join(resourceDir, "examples")
+    for file in os.listdir(path):
+        filepath = os.path.join(path,file)
+        if file.endswith('.json') and os.path.isfile(filepath):
+            bar.add_command(label=file.removesuffix(".json"), command=lambda filepath=filepath: exampleOpen(filepath, list, subBox, startIndicator, endIndicator, startLabel, endLabel))
+
+def exampleOpen(path, list, subBox, startIndicator, endIndicator, startLabel, endLabel):
+    global startColor, endColor
+    fileOpen(path)
+    expanded_categories = set()
+    for category_id in list.get_children():
+        if list.item(category_id, 'open'): expanded_categories.add(list.item(category_id, 'values')[0].strip())
+    list.delete(*list.get_children())
+    for category in categories:
+        categoryID = list.insert("", "end", text="", values=(category))
+        categories[category]["id"] = categoryID
+        for subcategory in categories[category]["sub"]:
+            subcategoryID = list.insert(categoryID, "end", text="", values=("\u00A0\u00A0\u00A0\u00A0" + subcategory))
+            categories[category]["sub"][subcategory]["id"] = subcategoryID
+        if category in expanded_categories: list.item(categoryID, open=True)
+    subBox.config(values=categories.keys())
+    startIndicator.config(bg=startColor)
+    startLabel.config(text=f"Start Color: {startColor}")
+    endIndicator.config(bg=endColor)
+    endLabel.config(text=f"End Color: {endColor}")
 
 # Button Functions
 def sepAdd(type, name, parent_category):
@@ -146,8 +182,6 @@ def settingsCheck():
         data = json.load(f)
         if theme == data["theme"]["name"] and themeAccent == data["theme"]["accent"] and header == data["header"]: return True
         else: return False
-        
-# TODO add example lists
 
 def settingsSave():
     global theme, header, themeAccent
