@@ -22,7 +22,7 @@ def closeSettings():
 # Main Window
 ui = tk.Tk()
 ui.title("MO2 Separator Generator")
-ui.iconphoto(False, tk.PhotoImage(file=bck.iconDir))
+ui.iconbitmap(bck.iconDir)
 ui.geometry("550x525+100+100")
 ui.minsize(550,450)
 ui.resizable(True, True)
@@ -32,7 +32,7 @@ ui.protocol("WM_DELETE_WINDOW", lambda: closeProgram())
 settings = tk.Toplevel(ui)
 settings.withdraw()
 settings.title("Settings")
-settings.iconphoto(False, tk.PhotoImage(file=bck.iconDir))
+settings.iconbitmap(bck.iconDir)
 settings.geometry('230x120')
 settings.resizable(False, False)
 
