@@ -110,6 +110,8 @@ def sepRemove(type, name, children, parent):
     global saved; saved = False
     
 def outputGen():
+    global gradient
+    gradientGet()
     path = prompt.askdirectory()
     profilePath = os.path.join(path, 'profiles', 'default')
     modsPath = os.path.join(path, 'mods')
