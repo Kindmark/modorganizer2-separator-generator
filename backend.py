@@ -166,11 +166,12 @@ def settingsGet():
     global theme, themeAccent, header
     if not os.path.exists(appdataDir):
         os.makedirs(appdataDir)
-    if not os.path.exists(appdataDir + '/MO2se.json'):
-        with open(os.path.join(appdataDir, 'MO2SE.json'), "w") as f:
-            data = {"theme": {"name": 'Nord', "accent": 'Blue'}, "header": 'Bracket'}
-            json.dump(data, f, indent=4)
-            f.close
+    if not os.path.exists(os.path.join(appdataDir, 'MO2SE.json')):
+        theme = 'Nord'; themeAccent = 'Blue'; header = 'Bracket'
+        data = {"theme": {"name": theme, "accent": themeAccent}, "header": header}
+        f = open(os.path.join(appdataDir, 'MO2SE.json'), "w")
+        json.dump(data, f, indent=4)
+        f.close()
     else:
         with open(os.path.join(appdataDir, 'MO2SE.json'), "r") as f:
             data = json.load(f)
