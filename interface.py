@@ -138,10 +138,10 @@ def updateList():
         if separatorList.item(category_id, 'open'): expanded_categories.add(separatorList.item(category_id, 'values')[0].strip())
     separatorList.delete(*separatorList.get_children())
     for category in bck.categories:
-        categoryID = separatorList.insert("", "end", text="", values=(category))
+        categoryID = separatorList.insert("", "end", text="", values=(category,))
         bck.categories[category]["id"] = categoryID
         for subcategory in bck.categories[category]["sub"]:
-            subcategoryID = separatorList.insert(categoryID, "end", text="", values=("\u00A0\u00A0\u00A0\u00A0" + subcategory))
+            subcategoryID = separatorList.insert(categoryID, "end", text="", values=(f"\u00A0\u00A0\u00A0\u00A0{subcategory}",))
             bck.categories[category]["sub"][subcategory]["id"] = subcategoryID
         if category in expanded_categories: separatorList.item(categoryID, open=True)
     subBox.config(values=list(bck.categories.keys()))
