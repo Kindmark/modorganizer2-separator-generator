@@ -43,7 +43,7 @@ def fileOpen(path=None):
             categories.clear()
             startColor = "#000000"
             endColor = "#ffffff"
-    if path == None:
+    if path is None:
         path = prompt.askopenfilename(initialdir=rootDir, filetypes=[("JSON", "*.json")], defaultextension=".json")
     with open(path, "r") as f:
         data = json.load(f)
@@ -74,7 +74,7 @@ def exampleOpen(path, list, subBox, startIndicator, endIndicator, startLabel, en
             subcategoryID = list.insert(categoryID, "end", text="", values=(f"\u00A0\u00A0\u00A0\u00A0{subcategory}",))
             categories[category]["sub"][subcategory]["id"] = subcategoryID
         if category in expanded_categories: list.item(categoryID, open=True)
-    subBox.config(values=categories.keys())
+    subBox.config(values=list(categories.keys()))
     startIndicator.config(bg=startColor)
     startLabel.config(text=f"Start Color: {startColor}")
     endIndicator.config(bg=endColor)
