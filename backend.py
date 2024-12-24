@@ -31,7 +31,7 @@ def fileSave():
     path = prompt.asksaveasfilename(initialdir=rootDir, filetypes=[("JSON", "*.json")], defaultextension=".json")
     data = {"categories": categories, "gradient": {"startColor": startColor, "endColor": endColor}}
     with open(path, "w") as f:
-        json.dump(data, f, sort_keys=True, indent=4)
+        json.dump(data, f, indent=4)
     global saved; saved = True
         
 def fileOpen(path=None):
@@ -166,7 +166,7 @@ def settingsGet():
     if not os.path.exists(appdataDir + '/MO2se.json'):
         with open(os.path.join(appdataDir, 'MO2SE.json'), "w") as f:
             data = {"theme": {"name": 'Nord', "accent": 'Blue'}, "header": 'Bracket'}
-            json.dump(data, f, sort_keys=True, indent=4)
+            json.dump(data, f, indent=4)
             f.close
     else:
         with open(os.path.join(appdataDir, 'MO2SE.json'), "r") as f:
