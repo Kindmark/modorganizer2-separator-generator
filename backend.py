@@ -1,7 +1,8 @@
-import json, os
+import json, os, sys
 from tkinter import messagebox as msg, filedialog as prompt
 
 rootDir = os.path.dirname(os.path.abspath(__file__))
+initDir = os.path.dirname(os.path.abspath(sys.argv[0]))
 appdataDir = os.path.join(os.getenv('APPDATA'), "Furglitch", "MO2SE")
 tempDir = os.path.join(os.getenv('TEMP'), "Furglitch", "MO2SE")
 resourceDir = os.path.join(rootDir, "resources")
@@ -28,7 +29,7 @@ def fileNew():
     
 def fileSave():
     global categories, startColor, endColor
-    path = prompt.asksaveasfilename(initialdir=rootDir, filetypes=[("JSON", "*.json")], defaultextension=".json")
+    path = prompt.asksaveasfilename(initialdir=initDir, filetypes=[("JSON", "*.json")], defaultextension=".json")
     data = {"categories": categories, "gradient": {"startColor": startColor, "endColor": endColor}}
     with open(path, "w") as f:
         json.dump(data, f, indent=4)
@@ -44,7 +45,7 @@ def fileOpen(path=None):
             startColor = "#000000"
             endColor = "#ffffff"
     if path is None:
-        path = prompt.askopenfilename(initialdir=rootDir, filetypes=[("JSON", "*.json")], defaultextension=".json")
+        path = prompt.askopenfilename(initialdir=initDir, filetypes=[("JSON", "*.json")], defaultextension=".json")
     with open(path, "r") as f:
         data = json.load(f)
         categories = data["categories"]
