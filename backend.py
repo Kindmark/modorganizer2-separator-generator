@@ -28,7 +28,7 @@ def fileNew():
     
 def fileSave():
     global categories, startColor, endColor
-    path = prompt.asksaveasfilename(filetypes=[("JSON", "*.json")])
+    path = prompt.asksaveasfilename(initialdir=rootDir, filetypes=[("JSON", "*.json")], defaultextension=".json")
     data = {"categories": categories, "gradient": {"startColor": startColor, "endColor": endColor}}
     with open(path, "w") as f:
         json.dump(data, f, sort_keys=True, indent=4)
@@ -44,8 +44,7 @@ def fileOpen(path=None):
             startColor = "#000000"
             endColor = "#ffffff"
     if path == None:
-        path = prompt.askopenfilename(filetypes=[("JSON", "*.json")])
-    print(path)
+        path = prompt.askopenfilename(initialdir=rootDir, filetypes=[("JSON", "*.json")], defaultextension=".json")
     with open(path, "r") as f:
         data = json.load(f)
         categories = data["categories"]
