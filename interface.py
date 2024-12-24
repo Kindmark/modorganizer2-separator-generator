@@ -145,6 +145,8 @@ def updateList():
             bck.categories[category]["sub"][subcategory]["id"] = subcategoryID
         if category in expanded_categories: separatorList.item(categoryID, open=True)
     subBox.config(values=list(bck.categories.keys()))
+    updateColor("start", bck.startColor)
+    updateColor("end", bck.endColor)
 
 # Buttons
 buttonFrame = ttk.Frame(ui)
@@ -182,22 +184,25 @@ def moveSeparator(direction):
     if selection:
         parentID = separatorList.parent(selection)
         index = separatorList.index(selection)
-        if direction == "up":
-            if index > 0:
-                separatorList.move(selection, parentID, index - 1)
-        elif direction == "down":
-            if index < len(separatorList.get_children(parentID)) - 1:
-                separatorList.move(selection, parentID, index + 1)
+        siblings = separatorList.get_children(parentID)
+        if direction == "up" and index > 0:
+            separatorList.move(selection, parentID, index - 1)
+        elif direction == "down" and index < len(siblings) - 1:
+            separatorList.move(selection, parentID, index + 1)
     updateOrder()
+    separatorList.selection_set(selection.index)
+
 def updateOrder():
-    bck.categories.clear()
-    for ID in separatorList.get_children():
-        name = separatorList.item(ID, "values")[0].strip()
-        bck.categories[name] = {"sub": []}
-        for subID in separatorList.get_children(ID):
-            subname = separatorList.item(subID, "values")[0].strip()
-            bck.categories[name]["sub"].append(subname)
+    new_categories = {}
+    for category_id in separatorList.get_children():
+        category_name = separatorList.item(category_id, "values")[0].strip()
+        new_categories[category_name] = {"id": category_id, "sub": {}}
+        for subcategory_id in separatorList.get_children(category_id):
+            subcategory_name = separatorList.item(subcategory_id, "values")[0].strip()
+            new_categories[category_name]["sub"][subcategory_name] = {"id": subcategory_id}
+    bck.categories = new_categories
     updateList()
+
         
 # Input Frame
 inputFrame = ttk.Frame(ui)
