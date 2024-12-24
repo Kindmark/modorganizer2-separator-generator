@@ -68,10 +68,10 @@ def exampleOpen(path, list, subBox, startIndicator, endIndicator, startLabel, en
         if list.item(category_id, 'open'): expanded_categories.add(list.item(category_id, 'values')[0].strip())
     list.delete(*list.get_children())
     for category in categories:
-        categoryID = list.insert("", "end", text="", values=(category))
+        categoryID = list.insert("", "end", text="", values=(category,))
         categories[category]["id"] = categoryID
         for subcategory in categories[category]["sub"]:
-            subcategoryID = list.insert(categoryID, "end", text="", values=("\u00A0\u00A0\u00A0\u00A0" + subcategory))
+            subcategoryID = list.insert(categoryID, "end", text="", values=(f"\u00A0\u00A0\u00A0\u00A0{subcategory}",))
             categories[category]["sub"][subcategory]["id"] = subcategoryID
         if category in expanded_categories: list.item(categoryID, open=True)
     subBox.config(values=categories.keys())
