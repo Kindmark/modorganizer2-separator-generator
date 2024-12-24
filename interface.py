@@ -22,7 +22,7 @@ def closeSettings():
 # Main Window
 ui = tk.Tk()
 ui.title("MO2 Separator Generator")
-ui.iconphoto(False, tk.PhotoImage(file=bck.iconDir)) # https://www.nexusmods.com/starfield/mods/4221
+ui.iconphoto(False, tk.PhotoImage(file=bck.iconDir))
 ui.geometry("525x405+100+100")
 ui.resizable(True, False)
 ui.protocol("WM_DELETE_WINDOW", lambda: closeProgram())
@@ -31,7 +31,7 @@ ui.protocol("WM_DELETE_WINDOW", lambda: closeProgram())
 settings = tk.Toplevel(ui)
 settings.withdraw()
 settings.title("Settings")
-settings.iconphoto(False, tk.PhotoImage(file=bck.iconDir)) # https://www.nexusmods.com/starfield/mods/4221
+settings.iconphoto(False, tk.PhotoImage(file=bck.iconDir))
 settings.geometry('230x120')
 settings.resizable(True, False)
 
@@ -141,7 +141,7 @@ def updateList():
         categoryID = separatorList.insert("", "end", text="", values=(category))
         bck.categories[category]["id"] = categoryID
         for subcategory in bck.categories[category]["sub"]:
-            subcategoryID = separatorList.insert(categoryID, "end", text="", values=("\u00A0\u00A0\u00A0\u00A0" + subcategory))  # Indent subcategory with non-breaking spaces
+            subcategoryID = separatorList.insert(categoryID, "end", text="", values=("\u00A0\u00A0\u00A0\u00A0" + subcategory))
             bck.categories[category]["sub"][subcategory]["id"] = subcategoryID
         if category in expanded_categories: separatorList.item(categoryID, open=True)
     subBox.config(values=list(bck.categories.keys()))
