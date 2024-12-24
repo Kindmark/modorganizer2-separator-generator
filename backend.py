@@ -197,6 +197,7 @@ def hexRGB(hex):
     return tuple(int(hex[i:i+2], 16) for i in (0, 2, 4))
 
 def stepRGB(start, end, steps):
+    if steps == 1: return [start]
     gradient = []
     for i in range(steps):
         t = i / (steps - 1)
@@ -211,6 +212,7 @@ def rgbHex(rgb):
 
 def gradientGet():
     global startColor, endColor, gradient
+    if len(categories) == 0: return
     startRGB = hexRGB(startColor)
     endRGB = hexRGB(endColor)
     gradRGB = stepRGB(startRGB, endRGB, len(categories))
