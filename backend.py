@@ -172,9 +172,12 @@ def settingsGet():
     else:
         with open(os.path.join(appdataDir, 'MO2SE.json'), "r") as f:
             data = json.load(f)
-            theme = data["theme"]["name"]
-            themeAccent = data["theme"]["accent"]
-            header = data["header"]
+            if data["theme"]["name"] in themeGet("name"): theme = data["theme"]["name"]
+            else: theme = "Nord"
+            if data["theme"]["accent"] in ['Red', 'Orange', 'Yellow', 'Green', 'Blue', 'Purple']: themeAccent = data["theme"]["accent"]
+            else: themeAccent = "Blue"
+            if data["header"] in headerGet("name"): header = data["header"]
+            else: header = "Bracket"
 
 def settingsCheck():
     global theme, themeAccent, header
