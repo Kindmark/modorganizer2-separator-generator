@@ -60,20 +60,20 @@ def exampleGet(bar, list, subBox, startIndicator, endIndicator, startLabel, endL
         if file.endswith('.json') and os.path.isfile(filepath):
             bar.add_command(label=file.removesuffix(".json"), command=lambda filepath=filepath: exampleOpen(filepath, list, subBox, startIndicator, endIndicator, startLabel, endLabel))
 
-def exampleOpen(path, list, subBox, startIndicator, endIndicator, startLabel, endLabel):
+def exampleOpen(path, tree, subBox, startIndicator, endIndicator, startLabel, endLabel):
     global startColor, endColor
     fileOpen(path)
     expanded_categories = set()
-    for category_id in list.get_children():
-        if list.item(category_id, 'open'): expanded_categories.add(list.item(category_id, 'values')[0].strip())
-    list.delete(*list.get_children())
+    for category_id in tree.get_children():
+        if tree.item(category_id, 'open'): expanded_categories.add(tree.item(category_id, 'values')[0].strip())
+    tree.delete(*tree.get_children())
     for category in categories:
-        categoryID = list.insert("", "end", text="", values=(category,))
+        categoryID = tree.insert("", "end", text="", values=(category,))
         categories[category]["id"] = categoryID
         for subcategory in categories[category]["sub"]:
-            subcategoryID = list.insert(categoryID, "end", text="", values=(f"\u00A0\u00A0\u00A0\u00A0{subcategory}",))
+            subcategoryID = tree.insert(categoryID, "end", text="", values=(f"\u00A0\u00A0\u00A0\u00A0{subcategory}",))
             categories[category]["sub"][subcategory]["id"] = subcategoryID
-        if category in expanded_categories: list.item(categoryID, open=True)
+        if category in expanded_categories: tree.item(categoryID, open=True)
     subBox.config(values=list(categories.keys()))
     startIndicator.config(bg=startColor)
     startLabel.config(text=f"Start Color: {startColor}")
