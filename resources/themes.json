@@ -1,0 +1,45 @@
+{
+    "Nord": {
+        "background1": "#2e3440",
+        "background2": "#3b4252",
+        "background3": "#434c5e",
+        "background4": "#4c566a",
+        "foreground1": "#d8dee9",
+        "foreground2": "#e5e9f0",
+        "foreground3": "#eceff4",
+        "accent1": "#bf616a",
+        "accent2": "#d08770",
+        "accent3": "#a3be8c",
+        "accent4": "#ebcb8b",
+        "accent5": "#81a1c1",
+        "accent6": "#b48ead"
+    },
+    "Dracula": {
+        "background1": "#282a36",
+        "background2": "#44475a",
+        "background3": "#44475a",
+        "background4": "#6272a4",
+        "foreground1": "#f8f8f2",
+        "accent1": "#ff5555",
+        "accent2": "#ffb86c",
+        "accent3": "#f1fa8c",
+        "accent4": "#50fa7b",
+        "accent5": "#8be9fd",
+        "accent6": "#bd93f9"
+    },
+    "Catppuccin Frappe": {
+        "background1": "#232634",
+        "background2": "#292c3c",
+        "background3": "#303446",
+        "background4": "#414559",
+        "foreground1": "#c6d0f5",
+        "foreground2": "#b5bfe2",
+        "foreground3": "#a5adce",
+        "accent1": "#e78284",
+        "accent2": "#ef9f76",
+        "accent3": "#e5c890",
+        "accent4": "#a6d189",
+        "accent5": "#8caaee",
+        "accent6": "#babbf1"
+    }
+}
