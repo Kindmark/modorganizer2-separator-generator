@@ -10,13 +10,17 @@ def closeProgram():
     if settings.state() != 'withdrawn': closeSettings()
     if bck.saved != True:
         if not bck.filePrompt(): return
+    bck.log.info("Closing Program")
     sys.exit()
 def closeSettings():
     if not bck.settingsCheck():
         if bck.settingsPrompt():
             settings.withdraw()
+            bck.log.info("Closed Settings")
             return False
-    else: settings.withdraw()
+    else:
+        settings.withdraw()
+        bck.log.info("Closed Settings")
     return True
 
 # Main Window
@@ -107,16 +111,13 @@ def showSettings():
     x = ui.winfo_x() + (ui.winfo_width() // 2) - (settings.winfo_width() // 2)
     y = ui.winfo_y() + (ui.winfo_height() // 2) - (settings.winfo_height() // 2)
     settings.geometry("+%d+%d" % (x,y))
+    bck.log.info("Opened Settings")
 def fileNew():
     bck.fileNew()
     updateList()
-    updateColor("start", bck.startColor)
-    updateColor("end", bck.endColor)
 def fileOpen():
     bck.fileOpen()
     updateList()
-    updateColor("start", bck.startColor)
-    updateColor("end", bck.endColor)
 def treeCollapse():
     for category in bck.categories: separatorList.item(bck.categories[category]["id"], open=False)
 def treeExpand():
@@ -148,6 +149,7 @@ def updateList():
     subBox.config(values=list(bck.categories.keys()))
     updateColor("start", bck.startColor)
     updateColor("end", bck.endColor)
+    bck.log.info("Updated separator list")
 
 # Buttons
 buttonFrame = ttk.Frame(ui)
@@ -191,8 +193,10 @@ def moveSeparator(direction):
         siblings = separatorList.get_children(parentID)
         if direction == "up" and index > 0:
             separatorList.move(selection, parentID, index - 1)
+            bck.log.info(f"Moved {separatorList.item(selection, 'values')[0].strip()} up")
         elif direction == "down" and index < len(siblings) - 1:
             separatorList.move(selection, parentID, index + 1)
+            bck.log.info(f"Moved {separatorList.item(selection, 'values')[0].strip()} down")
         separatorList.selection_set(selection)
     new_categories = {}
     for category_id in separatorList.get_children():
@@ -265,6 +269,7 @@ def updateColor(type, color):
         endLabel.config(text=f"End Color: {color}")
         bck.endColor = color
     bck.gradientGet()
+    bck.log.info(f"Updated {type} color to {color}")
 
 def applyTheme(theme_name, color):
     theme = bck.themeGet("theme", theme_name)
@@ -294,6 +299,7 @@ def applyTheme(theme_name, color):
     style.map('Heading', background=[('active', accent)])
     bck.theme = themeBox.get()
     bck.themeAccent = colorBox.get()
+    bck.log.info(f"Applied theme {theme_name} with accent {color}")
     
     
 
