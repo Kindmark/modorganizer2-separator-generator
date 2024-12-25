@@ -314,6 +314,8 @@ def applyTheme(theme_name, color):
     style.configure('Heading', background=theme['background1'], foreground=theme['foreground1'])
     style.map('Treeview', background=[('selected', theme['background4'])])
     style.map('Heading', background=[('active', accent)])
+    style.configure('Vertical.TScrollbar', background=theme['background2'], troughcolor=theme['background1'], arrowcolor=theme['foreground1'])
+    style.map('Vertical.TScrollbar', background=[('active', accent)])
     bck.theme = themeBox.get()
     bck.themeAccent = colorBox.get()
     bck.log.info(f"Applied theme {theme_name} with accent {color}")
