@@ -196,12 +196,12 @@ def headerGet(type, header=None):
 def applyCasing(type, text):
     global catCasing, subCasing
     if type == "cat":
-        if catCasing == "Capitalize": return text.capitalize()
+        if catCasing == "Capitalize": return text.title()
         elif catCasing == "UPPER": return text.upper()
         elif catCasing == "lower": return text.lower()
         else: return text
     if type == "sub":
-        if subCasing == "Capitalize": return text.capitalize()
+        if subCasing == "Capitalize": return text.title()
         elif subCasing == "UPPER": return text.upper()
         elif subCasing == "lower": return text.lower()
     else: return text
