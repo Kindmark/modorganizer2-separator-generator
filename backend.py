@@ -5,7 +5,7 @@ from tkinter import messagebox as msg, filedialog as prompt
 rootDir = os.path.dirname(os.path.abspath(__file__))
 initDir = os.path.dirname(os.path.abspath(sys.argv[0]))
 appdataDir = os.path.join(os.getenv('APPDATA'), "Furglitch", "MO2SE")
-logDir = os.path.join(appdataDir, 'logs',f'{dt.now().strftime('%Y-%m-%d %H%M%S')}.log')
+logDir = os.path.join(appdataDir, 'logs', f'{dt.now().strftime('%Y-%m-%d %H%M%S')}.log')
 resourceDir = os.path.join(rootDir, "resources")
 iconDir = os.path.join(resourceDir, "icon.ico")
 
@@ -15,11 +15,14 @@ examples = {}
 startColor = "#000000"
 endColor = "#ffffff"
 gradient = []
-header = ''
-theme = ''
-themeAccent = ''
+header = 'Bracket'
+theme = 'Nord'
+themeAccent = 'Blue'
+catCasing = 'Unchanged'
+subCasing = 'Unchanged'
 
 # Logging
+if not os.path.exists(os.path.join(appdataDir, 'logs')): os.makedirs(os.path.join(appdataDir, 'logs'))
 open(logDir, "w").close()
 log.basicConfig(
     filename=logDir,
@@ -147,7 +150,7 @@ def outputGen():
         l.seek(0, 0)
         i = 0; j=0
         for category, details in categories.items():
-            catSep = headerGet("start", header) + category+ headerGet("end", header) + '_separator'
+            catSep = headerGet("start", header) + applyCasing("cat", category) + headerGet("end", header) + '_separator'
             os.mkdir(os.path.join(modsPath, catSep))
             with open(os.path.join(modsPath, catSep, 'meta.ini'), 'w') as meta:
                 meta.write(f"[General]\ncolor={gradient[j]}")
@@ -155,7 +158,7 @@ def outputGen():
             j += 1
             for subcategory in details["sub"]:
                 i += 1
-                subSep = str(i)+'. '+subcategory+'_separator'
+                subSep = str(i)+'. ' + applyCasing("sub", subcategory) + '_separator'
                 os.mkdir(os.path.join(modsPath, subSep))
                 lines.insert(0, "+"+subSep+'\n')
         l.writelines(lines)
@@ -190,13 +193,32 @@ def headerGet(type, header=None):
             log.info(f"Headers {header} loaded: {type} - {output}")
     return output
 
+def applyCasing(type, text):
+    global catCasing, subCasing
+    if type == "cat":
+        if catCasing == "Capitalize": return text.capitalize()
+        elif catCasing == "UPPER": return text.upper()
+        elif catCasing == "lower": return text.lower()
+        else: return text
+    if type == "sub":
+        if subCasing == "Capitalize": return text.capitalize()
+        elif subCasing == "UPPER": return text.upper()
+        elif subCasing == "lower": return text.lower()
+    else: return text
+    
+def casingSet(type, case):
+    global catCasing, subCasing
+    if type == "cat":
+        catCasing = case
+        log.info(f"Category Casing Set: {case}")
+    if type == "sub":
+        subCasing = case
+        log.info(f"Subcategory Casing Set: {case}")
+
 def settingsGet():
-    global theme, themeAccent, header
-    if not os.path.exists(appdataDir):
-        os.makedirs(appdataDir)
+    global theme, themeAccent, header, catCasing, subCasing
     if not os.path.exists(os.path.join(appdataDir, 'MO2SE.json')):
-        theme = 'Nord'; themeAccent = 'Blue'; header = 'Bracket'
-        data = {"theme": {"name": theme, "accent": themeAccent}, "header": header}
+        data = {"theme": {"name": theme, "accent": themeAccent}, "header": header, "casing": {"cat": catCasing, "sub": subCasing}}  
         f = open(os.path.join(appdataDir, 'MO2SE.json'), "w")
         json.dump(data, f, indent=4)
         f.close()
@@ -210,13 +232,17 @@ def settingsGet():
             else: themeAccent = "Blue"
             if data["header"] in headerGet("name"): header = data["header"]
             else: header = "Bracket"
-            log.info(f"Settings Loaded: Theme {theme}, ThemeAccent {themeAccent}, Header {header}")
+            if data["casing"]["cat"] in ['Unchanged', 'Capitalize', 'UPPER', 'lower']: catCasing = data["casing"]["cat"]
+            else: catCasing = "Unchanged"
+            if data["casing"]["sub"] in ['Unchanged', 'Capitalize', 'UPPER', 'lower']: subCasing = data["casing"]["sub"]
+            else: subCasing = "Unchanged"
+            log.info(f"Settings Loaded: Theme {theme}, ThemeAccent {themeAccent}, Header {header}, Category Casing {catCasing}, Subcategory Casing {subCasing}")
 
 def settingsCheck():
-    global theme, themeAccent, header
+    global theme, themeAccent, header, catCasing, subCasing
     with open(os.path.join(appdataDir, 'MO2SE.json'), "r") as f:
         data = json.load(f)
-        if theme == data["theme"]["name"] and themeAccent == data["theme"]["accent"] and header == data["header"]:
+        if theme == data["theme"]["name"] and themeAccent == data["theme"]["accent"] and header == data["header"] and catCasing == data["casing"]["cat"] and subCasing == data["casing"]["sub"]:
             log.info("Settings match saved settings")
             return True
         else:
@@ -224,11 +250,11 @@ def settingsCheck():
             return False
 
 def settingsSave():
-    global theme, header, themeAccent
+    global theme, header, themeAccent, casing
     with open(os.path.join(appdataDir + '/MO2SE.json'), "w") as f:
-        data = {"theme": {"name": theme, "accent": themeAccent}, "header": header}
+        data = {"theme": {"name": theme, "accent": themeAccent}, "header": header, "casing": {"cat": catCasing, "sub": subCasing}}  
         json.dump(data, f, sort_keys=True, indent=4)
-    log.info(f"Settings Saved: Theme {theme}, Theme Accent {themeAccent}, Header {header}")
+    log.info(f"Settings Saved: Theme {theme}, Theme Accent {themeAccent}, Header {header}, Category Casing {catCasing}, Subcategory Casing {subCasing}")
     
 # Gradient Processing
 def hexRGB(hex):
