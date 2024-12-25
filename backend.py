@@ -53,19 +53,15 @@ def fileSave():
         
 def fileOpen(path=None):
     global categories, startColor, endColor, saved
-    if saved != True:
-        if not msg.askyesno("Changes Not Saved", "You've adjusted your separator list but haven't saved! Are you sure you want to open an example?"):
+    if not saved:
+        if not msg.askyesno("Changes Not Saved", "You've adjusted your separator list but haven't saved!\nAre you sure you want to open this file?"):
             return
-        else:
-            categories.clear()
-            startColor = "#000000"
-            endColor = "#ffffff"
-    if path is None:
-        path = prompt.askopenfilename(initialdir=initDir, filetypes=[("JSON", "*.json")], defaultextension=".json")
-    if path: 
+    if path is None: path = prompt.askopenfilename(initialdir=initDir, filetypes=[("JSON", "*.json")], defaultextension=".json")
+    if path:
         with open(path, "r") as f:
             data = json.load(f)
-            categories = data["categories"]
+            categories.clear()
+            categories.update(data["categories"])
             startColor = data["gradient"]["startColor"]
             endColor = data["gradient"]["endColor"]
         saved = True
@@ -82,19 +78,23 @@ def exampleGet(bar, list, subBox, startIndicator, endIndicator, startLabel, endL
             log.info(f"Example Found: {file.removesuffix('.json')}")
 
 def exampleOpen(path, tree, subBox, startIndicator, endIndicator, startLabel, endLabel):
-    global startColor, endColor
+    global startColor, endColor, categories, saved
+    if not saved:
+        if not msg.askyesno("Unsaved Changes", "You have unsaved changes. Are you sure you want to open an example?"):
+            return
+    saved = True
     log.info(f"Example Selected: {os.path.basename(path).removesuffix('.json')}")
     fileOpen(path)
     expanded_categories = set()
     for category_id in tree.get_children():
         if tree.item(category_id, 'open'): expanded_categories.add(tree.item(category_id, 'values')[0].strip())
     tree.delete(*tree.get_children())
-    for category in categories:
-        sepAdd("cat", category)
-        #categoryID = tree.insert("", "end", text="", values=(category,))
-        categoryID = categories[category]["id"]
-        for subcategory in categories[category]["sub"]:
-            sepAdd("sub", subcategory, category)
+    for category, details in categories.items():
+        categoryID = tree.insert("", "end", text="", values=(category,))
+        categories[category]["id"] = categoryID
+        for subcategory in details["sub"]:
+            subcategoryID = tree.insert(categoryID, "end", text="", values=(f"\u00A0\u00A0\u00A0\u00A0{subcategory}",))
+            categories[category]["sub"][subcategory]["id"] = subcategoryID
         if category in expanded_categories: tree.item(categoryID, open=True)
     subBox.config(values=list(categories.keys()))
     startIndicator.config(bg=startColor)
