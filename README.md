@@ -11,8 +11,6 @@ This is my first major work in Python, teaching myself the language by convertin
 - Apply themes and color accents to the interface.
 - Generate output files for use in Mod Organizer 2.
 - Load and save configurations in JSON format.
-- Example configurations for popular games like Skyrim SE, Fallout 4, and Cyberpunk 2077.
-  - Settings customizations are saveable and loaded at launch!
 
 ## Installation
 
