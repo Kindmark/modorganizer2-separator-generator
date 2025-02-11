@@ -43,7 +43,7 @@ This is my first major work in Python, teaching myself the language by convertin
     ```
 2. Build the executable:
     ```sh
-    pyinstaller -n 'Mod Organizer Separator Generator' --onefile -w interface.py backend.py --add-data "resources;resources" -i 'resources/icon.ico
+    pyinstaller -n 'Mod Organizer Separator Generator' --onefile -w interface.py backend.py --add-data "resources;resources" -i 'resources/icon.ico'
     ```
 3. The executable will be located in the `dist` directory.
 
