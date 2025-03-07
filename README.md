@@ -4,6 +4,8 @@ A tool for creating separators for categorization within Mod Organizer 2, making
 
 This is my first major work in Python, teaching myself the language by converting a Powershell script I made into a Python script (with an easy UI!). And feedback is welcome!
 
+#### Note: I've recently switched to using Arch instead of Windows. I plan to develop some native compatibility for Linux in the future, but for now I can confirm running the .exe with Wine fully works. If you experience any issues, let me know.
+
 ## Features
 
 - Create and manage categories and subcategories for mod organization.
