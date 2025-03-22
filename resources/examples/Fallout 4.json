@@ -540,16 +540,13 @@
                 "Game Settings": {
                     "id": "I0B1"
                 },
-                "Previsibine Patches": {
-                    "id": "I0B2"
-                },
                 "Misc. Late Loader": {
-                    "id": "I0B3"
+                    "id": "I0B2"
                 }
             }
         },
         "Unsorted": {
-            "id": "I0C2",
+            "id": "I0C0",
             "sub": {}
         }
     },
