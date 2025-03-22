@@ -1,535 +1,493 @@
 {
     "categories": {
         "Official Content": {
-            "id": "I29B",
+            "id": "I001",
             "sub": {
                 "DLC": {
-                    "id": "I29C"
+                    "id": "I002"
                 },
                 "DLC Tweaks": {
-                    "id": "I29D"
+                    "id": "I003"
                 }
             }
         },
         "Utilities": {
-            "id": "I29E",
+            "id": "I004",
             "sub": {
-                "Resources & Frameworks": {
-                    "id": "I29F"
+                "Modders' Resources": {
+                    "id": "I005"
                 },
-                "Game Engine Tweaks": {
-                    "id": "I2A0"
+                "Engine Tweaks": {
+                    "id": "I006"
                 },
-                "CET Plugins": {
-                    "id": "I2A1"
+                "Core Frameworks": {
+                    "id": "I007"
+                },
+                "Cyber Engine Tweaks (CET) Plugins": {
+                    "id": "I008"
                 },
                 "Bug Fixes": {
-                    "id": "I2A2"
+                    "id": "I009"
                 },
-                "Optimization": {
-                    "id": "I2A3"
+                "Quality of Life": {
+                    "id": "I00A"
                 },
-                "QOL Tweaks": {
-                    "id": "I2A4"
-                },
-                "Modders Resources": {
-                    "id": "I2A5"
-                },
-                "Tools": {
-                    "id": "I2A6"
+                "Scripts & Tools": {
+                    "id": "I00B"
                 }
             }
         },
-        "Visuals": {
-            "id": "I2A7",
+        "Textures & Meshes": {
+            "id": "I00C",
             "sub": {
-                "Mesh & Texture Fixes": {
-                    "id": "I2A8"
+                "Mesh Fixes": {
+                    "id": "I00D"
+                },
+                "Texture Fixes": {
+                    "id": "I00E"
                 },
                 "Mesh Overhauls": {
-                    "id": "I2A9"
+                    "id": "I00F"
                 },
                 "Texture Overhauls": {
-                    "id": "I2AA"
+                    "id": "I010"
                 },
-                "Landscape": {
-                    "id": "I2AB"
+                "Landscapes": {
+                    "id": "I011"
                 },
-                "Flora (Trees, Grass, Foliage)": {
-                    "id": "I2AC"
+                "Vegetation (Trees, Grass, Foliage)": {
+                    "id": "I012"
                 },
-                "Fauna (Creatures)": {
-                    "id": "I2AD"
+                "Creatures": {
+                    "id": "I013"
                 },
                 "Architecture": {
-                    "id": "I2AE"
+                    "id": "I014"
                 },
                 "Furniture": {
-                    "id": "I2AF"
-                },
-                "Armory (Weapons, Armor, Clothing)": {
-                    "id": "I2B0"
-                },
-                "Consumables (Food, Ingredients, Drugs)": {
-                    "id": "I2B1"
+                    "id": "I015"
                 },
                 "Clutter": {
-                    "id": "I2B2"
+                    "id": "I016"
                 },
-                "Misc Textures": {
-                    "id": "I2B3"
+                "Equipment (Weapons, Armor, Clothing)": {
+                    "id": "I017"
+                },
+                "Consumables (Food, Ingredients, Chems)": {
+                    "id": "I018"
+                },
+                "Misc. Textures": {
+                    "id": "I019"
                 }
             }
         },
-        "Interface": {
-            "id": "I2B4",
+        "Visual Effects": {
+            "id": "I01A",
             "sub": {
-                "Console": {
-                    "id": "I2B5"
+                "ENB & Reshade": {
+                    "id": "I01B"
                 },
+                "Particles": {
+                    "id": "I01C"
+                },
+                "Gore": {
+                    "id": "I01D"
+                },
+                "Fire, Ash, & Smoke": {
+                    "id": "I01E"
+                },
+                "Water, Ice, & Snow": {
+                    "id": "I01F"
+                },
+                "Item Effects": {
+                    "id": "I020"
+                },
+                "Lighting": {
+                    "id": "I021"
+                },
+                "Weather": {
+                    "id": "I022"
+                },
+                "Sky": {
+                    "id": "I023"
+                },
+                "Misc. Effects": {
+                    "id": "I024"
+                }
+            }
+        },
+        "User Interface": {
+            "id": "I025",
+            "sub": {
                 "Main Menu": {
-                    "id": "I2B6"
+                    "id": "I026"
                 },
                 "Loading Screen": {
-                    "id": "I2B7"
-                },
-                "Videos & Cinematics": {
-                    "id": "I2C5"
-                },
-                "HUD": {
-                    "id": "I2B8"
-                },
-                "HUD - Dialogue": {
-                    "id": "I2B9"
-                },
-                "HUD - Quickhacking": {
-                    "id": "I2C4"
-                },
-                "Inventory": {
-                    "id": "I2BA"
-                },
-                "Inventory - Crafting": {
-                    "id": "I2BB"
-                },
-                "Inventory - Cyberware": {
-                    "id": "I2BC"
-                },
-                "Inventory - Sorting": {
-                    "id": "I2BD"
-                },
-                "Maps": {
-                    "id": "I2BE"
+                    "id": "I027"
                 },
                 "Settings Menu": {
-                    "id": "I2BF"
+                    "id": "I028"
                 },
-                "Settings Menu - Mod Configuration": {
-                    "id": "I2C0"
+                "HUD": {
+                    "id": "I029"
+                },
+                "Inventory": {
+                    "id": "I02A"
+                },
+                "Inventory - Sorting": {
+                    "id": "I02B"
+                },
+                "Cyberware": {
+                    "id": "I02C"
+                },
+                "Crafting": {
+                    "id": "I02D"
+                },
+                "Dialogue": {
+                    "id": "I02E"
+                },
+                "Fonts": {
+                    "id": "I02F"
+                },
+                "Maps": {
+                    "id": "I030"
                 },
                 "Camera": {
-                    "id": "I2C1"
+                    "id": "I031"
                 },
-                "Camera - Photo Mode": {
-                    "id": "I2C2"
+                "Controls & Keybinds": {
+                    "id": "I032"
                 },
-                "Controls": {
-                    "id": "I2C3"
+                "Console": {
+                    "id": "I033"
                 }
             }
         },
         "Audio": {
-            "id": "I2C6",
+            "id": "I034",
             "sub": {
-                "Sound Effects (SFX)": {
-                    "id": "I2C7"
-                },
                 "Voice": {
-                    "id": "I2C8"
+                    "id": "I035"
                 },
                 "Music": {
-                    "id": "I2C9"
+                    "id": "I036"
                 },
-                "Radio": {
-                    "id": "I2CA"
+                "Music - Radio": {
+                    "id": "I037"
                 },
                 "Ambience": {
-                    "id": "I2CB"
+                    "id": "I038"
+                },
+                "Weapons & Combat": {
+                    "id": "I039"
+                },
+                "Footsteps": {
+                    "id": "I03A"
+                },
+                "Misc. Audio": {
+                    "id": "I03B"
                 }
             }
         },
-        "Armory": {
-            "id": "I2CC",
+        "Equipment": {
+            "id": "I03C",
             "sub": {
-                "Armor & Clothing - Edits": {
-                    "id": "I2CD"
+                "Armor & Clothing Edits": {
+                    "id": "I03D"
                 },
                 "New Armor & Clothing": {
-                    "id": "I2CE"
+                    "id": "I03E"
                 },
-                "Weapons - Edits": {
-                    "id": "I2CF"
+                "Weapon Edits": {
+                    "id": "I03F"
                 },
                 "New Weapons": {
-                    "id": "I2D0"
+                    "id": "I040"
                 },
-                "Accessories - Edits": {
-                    "id": "I2D1"
+                "Accessory Edits": {
+                    "id": "I041"
                 },
                 "New Accessories": {
-                    "id": "I2D2"
+                    "id": "I042"
                 }
             }
         },
         "Locations": {
-            "id": "I2D3",
+            "id": "I043",
             "sub": {
                 "Multi-Location Overhauls": {
-                    "id": "I2D4"
+                    "id": "I044"
                 },
                 "Night City Center": {
-                    "id": "I2D5"
+                    "id": "I045"
                 },
                 "Watson": {
-                    "id": "I2D6"
+                    "id": "I046"
                 },
                 "Santa Domingo": {
-                    "id": "I2D7"
+                    "id": "I047"
                 },
                 "Heywood": {
-                    "id": "I2D8"
+                    "id": "I048"
                 },
                 "Pacifica": {
-                    "id": "I2D9"
+                    "id": "I049"
                 },
                 "Westbrook": {
-                    "id": "I2DA"
+                    "id": "I04A"
                 },
-                "Badlands": {
-                    "id": "I2DB"
+                "Bad Lands": {
+                    "id": "I04B"
                 },
-                "Phantom Liberty Locations (Dogtown)": {
-                    "id": "I2DC"
-                },
-                "Modded Location Edits": {
-                    "id": "I2DD"
-                },
-                "Misc. Exteriors": {
-                    "id": "I2DE"
-                },
-                "Misc. Interiors": {
-                    "id": "I2DF"
+                "Dogtown (Phantom Liberty)": {
+                    "id": "I04C"
                 },
                 "Player Homes": {
-                    "id": "I2E0"
-                }
-            }
-        },
-        "Quests": {
-            "id": "I2E1",
-            "sub": {
-                "Quest System": {
-                    "id": "I2E2"
+                    "id": "I04D"
                 },
-                "New Quests - DLC Sized": {
-                    "id": "I2E3"
+                "Misc. Exteriors": {
+                    "id": "I04E"
                 },
-                "New Quests": {
-                    "id": "I2E4"
-                },
-                "Quest Edits": {
-                    "id": "I2E5"
-                },
-                "Quest Expansions": {
-                    "id": "I2E6"
-                }
-            }
-        },
-        "NPCs": {
-            "id": "I2E7",
-            "sub": {
-                "NPC Behavior": {
-                    "id": "I2E8"
-                },
-                "Follower Behavior": {
-                    "id": "I2E9"
-                },
-                "New NPCs": {
-                    "id": "I2EA"
-                },
-                "NPC Edits": {
-                    "id": "I2EB"
-                },
-                "New Followers": {
-                    "id": "I2EC"
-                },
-                "Follower Edits": {
-                    "id": "I2ED"
-                },
-                "New Factions": {
-                    "id": "I2EE"
-                },
-                "Faction Edits": {
-                    "id": "I2EF"
-                },
-                "New Creatures": {
-                    "id": "I2F0"
-                },
-                "Creature Edits": {
-                    "id": "I2F1"
-                },
-                "NPC Romancing": {
-                    "id": "I2F2"
-                },
-                "Dialogue": {
-                    "id": "I2F3"
+                "Misc. Interiors": {
+                    "id": "I04F"
                 }
             }
         },
         "Appearance": {
-            "id": "I2F4",
+            "id": "I050",
             "sub": {
                 "Body, Physics, Skeleton": {
-                    "id": "I2F5"
+                    "id": "I051"
                 },
                 "Races": {
-                    "id": "I2F6"
+                    "id": "I052"
                 },
                 "Head": {
-                    "id": "I2F7"
+                    "id": "I053"
                 },
                 "Skin": {
-                    "id": "I2F8"
+                    "id": "I054"
                 },
                 "Eyes": {
-                    "id": "I2F9"
+                    "id": "I055"
                 },
                 "Hair": {
-                    "id": "I2FA"
+                    "id": "I056"
                 },
                 "Makeup & Tattoos": {
-                    "id": "I2FB"
+                    "id": "I057"
                 },
                 "BodySlide Presets": {
-                    "id": "I2FC"
+                    "id": "I058"
                 },
-                "Appearance Presets": {
-                    "id": "I2FD"
+                "LooksMenu Presets": {
+                    "id": "I059"
+                },
+                "NPC Appearance Overhauls": {
+                    "id": "I05A"
                 },
                 "Children": {
-                    "id": "I2FE"
+                    "id": "I05B"
+                }
+            }
+        },
+        "Quests": {
+            "id": "I05C",
+            "sub": {
+                "Quest System": {
+                    "id": "I05D"
                 },
-                "Creatures": {
-                    "id": "I2FF"
+                "Vanilla Quest Edits & Expansions": {
+                    "id": "I05E"
                 },
-                "NPC Overhauls": {
-                    "id": "I300"
+                "New Quests - DLC Sized": {
+                    "id": "I05F"
+                },
+                "New Quests": {
+                    "id": "I060"
+                }
+            }
+        },
+        "NPCs": {
+            "id": "I061",
+            "sub": {
+                "NPC Behavior": {
+                    "id": "I062"
+                },
+                "Follower Behavior": {
+                    "id": "I063"
+                },
+                "New NPCs": {
+                    "id": "I064"
+                },
+                "NPC Edits": {
+                    "id": "I065"
+                },
+                "New Followers": {
+                    "id": "I066"
+                },
+                "Follower Edits": {
+                    "id": "I067"
+                },
+                "New Factions": {
+                    "id": "I068"
+                },
+                "Faction Edits": {
+                    "id": "I069"
+                },
+                "New Creatures": {
+                    "id": "I06A"
+                },
+                "Creature Edits": {
+                    "id": "I06B"
+                },
+                "NPC Romancing": {
+                    "id": "I06C"
                 }
             }
         },
         "Gameplay": {
-            "id": "I301",
+            "id": "I06D",
             "sub": {
-                "Economy": {
-                    "id": "I302"
-                },
-                "Item Effects": {
-                    "id": "I303"
-                },
-                "Perks & Leveling": {
-                    "id": "I304"
-                },
-                "Balancing": {
-                    "id": "I305"
-                },
-                "Crafting & Items": {
-                    "id": "I306"
-                },
-                "Leveled Lists & Item Distribution": {
-                    "id": "I307"
-                },
                 "Combat": {
-                    "id": "I308"
+                    "id": "I06E"
                 },
-                "Vehicles": {
-                    "id": "I309"
-                },
-                "Cyberware": {
-                    "id": "I30A"
-                },
-                "Quickhacking": {
-                    "id": "I30B"
-                },
-                "Braindance": {
-                    "id": "I30C"
-                },
-                "The Net": {
-                    "id": "I30D"
+                "Movement": {
+                    "id": "I06F"
                 },
                 "Stealth": {
-                    "id": "I30E"
+                    "id": "I070"
                 },
-                "Immersion": {
-                    "id": "I30F"
+                "Economy": {
+                    "id": "I071"
                 },
-                "Cheating": {
-                    "id": "I310"
+                "Item Effects": {
+                    "id": "I072"
+                },
+                "Leveled List & Item Distribution": {
+                    "id": "I073"
+                },
+                "Leveling, Perks, and Skills": {
+                    "id": "I074"
+                },
+                "Balancing": {
+                    "id": "I075"
+                },
+                "Cyberware & Quickhacking": {
+                    "id": "I076"
+                },
+                "The Net": {
+                    "id": "I077"
+                },
+                "Vehicles": {
+                    "id": "I078"
+                },
+                "Cheats & Exploits": {
+                    "id": "I079"
                 },
                 "Misc. Gameplay": {
-                    "id": "I311"
+                    "id": "I07A"
+                }
+            }
+        },
+        "Crafting": {
+            "id": "I07B",
+            "sub": {
+                "Crafting System": {
+                    "id": "I07C"
+                },
+                "Crafting Stations": {
+                    "id": "I07D"
+                },
+                "New Items": {
+                    "id": "I07E"
+                },
+                "Item Edits": {
+                    "id": "I07F"
+                },
+                "Crafting Recipes": {
+                    "id": "I080"
+                },
+                "Crafting Components": {
+                    "id": "I081"
+                },
+                "Cooking Recipes": {
+                    "id": "I082"
+                },
+                "Cooking Ingredients": {
+                    "id": "I083"
+                },
+                "DLC - Automatron": {
+                    "id": "I084"
                 }
             }
         },
         "Animation": {
-            "id": "I312",
+            "id": "I085",
             "sub": {
-                "Animation & Behavior Engine": {
-                    "id": "I313"
+                "Animation Engine": {
+                    "id": "I086"
                 },
-                "Combat": {
-                    "id": "I314"
-                },
-                "Movement": {
-                    "id": "I315"
-                },
-                "Interactions": {
-                    "id": "I316"
-                },
-                "Idles": {
-                    "id": "I317"
+                "Animation Fixes": {
+                    "id": "I087"
                 },
                 "Physics": {
-                    "id": "I318"
+                    "id": "I088"
+                },
+                "Combat": {
+                    "id": "I089"
+                },
+                "Movement": {
+                    "id": "I08A"
+                },
+                "World Interactions": {
+                    "id": "I08B"
+                },
+                "Item Usage": {
+                    "id": "I08C"
+                },
+                "Idles": {
+                    "id": "I08D"
                 },
                 "Poses": {
-                    "id": "I319"
+                    "id": "I08E"
                 },
                 "Misc. Animations": {
-                    "id": "I31A"
-                }
-            }
-        },
-        "Atmosphere": {
-            "id": "I31B",
-            "sub": {
-                "ENB & Reshade": {
-                    "id": "I31C"
-                },
-                "Visual Effects": {
-                    "id": "I31D"
-                },
-                "Particles": {
-                    "id": "I31E"
-                },
-                "Gore": {
-                    "id": "I31F"
-                },
-                "Fire & Ash": {
-                    "id": "I320"
-                },
-                "Water": {
-                    "id": "I321"
-                },
-                "Item Effects": {
-                    "id": "I322"
-                },
-                "Misc. Effects": {
-                    "id": "I323"
-                },
-                "Lighting": {
-                    "id": "I324"
-                },
-                "Weather": {
-                    "id": "I325"
-                },
-                "Sky": {
-                    "id": "I326"
-                }
-            }
-        },
-        "NSFW": {
-            "id": "I327",
-            "sub": {
-                "Resources & Frameworks": {
-                    "id": "I328"
-                },
-                "Poses": {
-                    "id": "I329"
-                },
-                "Animations": {
-                    "id": "I32A"
-                },
-                "Roleplay": {
-                    "id": "I32B"
-                },
-                "Roleplay - Engagement": {
-                    "id": "I32C"
-                },
-                "Roleplay - Immersion": {
-                    "id": "I32D"
-                },
-                "Appearance": {
-                    "id": "I32E"
-                },
-                "Appearance - Makeup & Tattoos": {
-                    "id": "I32F"
-                },
-                "Clothing & Armor": {
-                    "id": "I330"
-                },
-                "Settlement Objects": {
-                    "id": "I331"
-                },
-                "Items": {
-                    "id": "I332"
-                },
-                "Quests": {
-                    "id": "I333"
-                },
-                "Textures and Meshes": {
-                    "id": "I334"
-                },
-                "Audio": {
-                    "id": "I335"
-                },
-                "Misc. NSFW": {
-                    "id": "I336"
-                },
-                "Patches": {
-                    "id": "I337"
+                    "id": "I08F"
                 }
             }
         },
         "Late Loaders": {
-            "id": "I338",
+            "id": "I090",
             "sub": {
                 "LOD Mods": {
-                    "id": "I339"
+                    "id": "I091"
                 },
                 "Late Textures": {
-                    "id": "I33A"
+                    "id": "I092"
                 },
                 "Patches": {
-                    "id": "I33B"
+                    "id": "I093"
                 },
                 "Translations": {
-                    "id": "I33C"
+                    "id": "I094"
                 },
-                "Bodyshape Outfit Conversions": {
-                    "id": "I33D"
+                "Outfit Body Shape Conversions": {
+                    "id": "I095"
                 },
                 "Tool Outputs": {
-                    "id": "I33E"
+                    "id": "I096"
                 },
                 "Game Settings": {
-                    "id": "I33F"
+                    "id": "I097"
                 },
                 "Misc. Late Loader": {
-                    "id": "I340"
+                    "id": "I098"
                 }
             }
         },
         "Unsorted": {
-            "id": "I341",
+            "id": "I099",
             "sub": {}
         }
     },
