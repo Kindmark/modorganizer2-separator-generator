@@ -19,7 +19,10 @@ else:
     sys.exit(1)
 logDir = os.path.join(configDir, 'logs', f'{dt.now().strftime('%Y-%m-%d %H%M%S')}.log')
 resourceDir = os.path.join(rootDir, "resources")
-iconDir = os.path.join(resourceDir, "icon.png")
+if osType == 'nt':
+    iconDir = os.path.join(resourceDir, "icon.ico")
+else:
+    iconDir = os.path.join(resourceDir, "icon.png")
 
 print(f"Root Directory: {rootDir}")
 print(f"Initial Directory: {initDir}")

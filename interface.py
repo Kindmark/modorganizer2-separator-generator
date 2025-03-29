@@ -26,10 +26,7 @@ def closeSettings():
 
 # Main Window
 ui = tk.Tk()
-img = Image.open(bck.iconDir)
-ico = ImageTk.PhotoImage(img)
 ui.title("MO2 Separator Generator")
-ui.wm_iconphoto(True, ico)
 ui.geometry("550x525+100+100")
 ui.minsize(750,500)
 ui.resizable(True, True)
@@ -39,9 +36,18 @@ ui.protocol("WM_DELETE_WINDOW", lambda: closeProgram())
 settings = tk.Toplevel(ui)
 settings.withdraw()
 settings.title("Settings")
-settings.wm_iconphoto(True, ico)
 settings.geometry('250x200')
 settings.resizable(False, False)
+
+# Set icon
+if bck.osType == "nt":
+    ui.iconbitmap(bck.iconDir)
+    settings.iconbitmap(bck.iconDir)
+else:
+    img = Image.open(bck.iconDir)
+    ico = ImageTk.PhotoImage(img)
+    ui.wm_iconphoto(True, ico)
+    settings.wm_iconphoto(True, ico)
 
 themeFrame = ttk.Frame(settings, padding=(0,0,10,5))
 themeChoiceFrame = ttk.Frame(themeFrame)
