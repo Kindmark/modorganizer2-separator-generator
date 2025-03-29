@@ -4,8 +4,19 @@ from tkinter import messagebox as msg, filedialog as prompt
 
 rootDir = os.path.dirname(os.path.abspath(__file__))
 initDir = os.path.dirname(os.path.abspath(sys.argv[0]))
-appdataDir = os.path.join(os.getenv('APPDATA'), "Furglitch", "MO2SE")
-logDir = os.path.join(appdataDir, 'logs', f'{dt.now().strftime('%Y-%m-%d %H%M%S')}.log')
+if os.name == 'nt':
+    configDir = os.path.join(os.getenv('APPDATA'), "Furglitch", "MO2SG")
+    log.info("Windows OS detected")
+    log.info(f"Config Directory: {configDir}")
+elif os.name == 'posix':
+    configDir = os.path.join(os.path.expanduser('~'), ".config", "Furglitch", "MO2SG")
+    log.info("Linux OS detected")
+    log.info(f"Config Directory: {configDir}")
+else:
+    msg.showwarning("Warning","Unsupported OS")
+    log.warning("Unsupported OS")
+    sys.exit(1)
+logDir = os.path.join(configDir, 'logs', f'{dt.now().strftime('%Y-%m-%d %H%M%S')}.log')
 resourceDir = os.path.join(rootDir, "resources")
 iconDir = os.path.join(resourceDir, "icon.ico")
 
@@ -22,7 +33,7 @@ catCasing = 'Unchanged'
 subCasing = 'Unchanged'
 
 # Logging
-if not os.path.exists(os.path.join(appdataDir, 'logs')): os.makedirs(os.path.join(appdataDir, 'logs'))
+if not os.path.exists(os.path.join(configDir, 'logs')): os.makedirs(os.path.join(configDir, 'logs'))
 open(logDir, "w").close()
 log.basicConfig(
     filename=logDir,
@@ -30,7 +41,7 @@ log.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S'
 )
-log.info("MO2SE Started")
+log.info("MO2SG Started")
 
 # Menu Functions
 def fileNew():
@@ -216,14 +227,14 @@ def casingSet(type, case):
 
 def settingsGet():
     global theme, themeAccent, header, catCasing, subCasing
-    if not os.path.exists(os.path.join(appdataDir, 'MO2SE.json')):
+    if not os.path.exists(os.path.join(configDir, 'MO2SG.json')):
         data = {"theme": {"name": theme, "accent": themeAccent}, "header": header, "casing": {"cat": catCasing, "sub": subCasing}}  
-        f = open(os.path.join(appdataDir, 'MO2SE.json'), "w")
+        f = open(os.path.join(configDir, 'MO2SG.json'), "w")
         json.dump(data, f, indent=4)
         f.close()
         log.info("Default Settings File Created")
     else:
-        with open(os.path.join(appdataDir, 'MO2SE.json'), "r") as f:
+        with open(os.path.join(configDir, 'MO2SG.json'), "r") as f:
             data = json.load(f)
             if data["theme"]["name"] in themeGet("name"): theme = data["theme"]["name"]
             else: theme = "Nord"
@@ -239,7 +250,7 @@ def settingsGet():
 
 def settingsCheck():
     global theme, themeAccent, header, catCasing, subCasing
-    with open(os.path.join(appdataDir, 'MO2SE.json'), "r") as f:
+    with open(os.path.join(configDir, 'MO2SG.json'), "r") as f:
         data = json.load(f)
         if theme == data["theme"]["name"] and themeAccent == data["theme"]["accent"] and header == data["header"] and catCasing == data["casing"]["cat"] and subCasing == data["casing"]["sub"]:
             log.info("Settings match saved settings")
@@ -250,7 +261,7 @@ def settingsCheck():
 
 def settingsSave():
     global theme, header, themeAccent, casing
-    with open(os.path.join(appdataDir + '/MO2SE.json'), "w") as f:
+    with open(os.path.join(configDir + '/MO2SG.json'), "w") as f:
         data = {"theme": {"name": theme, "accent": themeAccent}, "header": header, "casing": {"cat": catCasing, "sub": subCasing}}  
         json.dump(data, f, sort_keys=True, indent=4)
     log.info(f"Settings Saved: Theme {theme}, Theme Accent {themeAccent}, Header {header}, Category Casing {catCasing}, Subcategory Casing {subCasing}")
