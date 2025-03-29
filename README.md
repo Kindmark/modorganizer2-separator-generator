@@ -4,8 +4,6 @@ A tool for creating separators for categorization within Mod Organizer 2, making
 
 This is my first major work in Python, teaching myself the language by converting a Powershell script I made into a Python script (with an easy UI!). And feedback is welcome!
 
-#### Note: I've recently switched to using Arch instead of Windows. I plan to develop some native compatibility for Linux in the future, but for now I can confirm running the .exe with Wine fully works. If you experience any issues, let me know.
-
 ## Features
 
 - Create and manage categories and subcategories for mod organization.
@@ -59,6 +57,6 @@ The application logs almost everything to files located in the `%APPDATA%/Furgli
 
 Contributions, critiques, and bug reports are welcome! If you have any suggestions or improvements, please create a pull request or open an issue.
 
-## License
 
-This project is licensed under the GNU General Public License v3.0.
+## License
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
