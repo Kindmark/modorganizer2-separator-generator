@@ -4,6 +4,8 @@ A tool for creating separators for categorization within Mod Organizer 2, making
 
 This is my first major work in Python, teaching myself the language by converting a Powershell script I made into a Python script (with an easy UI!). And feedback is welcome!
 
+<img src="preview.png"></img>
+
 ## Features
 
 - Create and manage categories and subcategories for mod organization.
