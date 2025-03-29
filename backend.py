@@ -4,12 +4,13 @@ from tkinter import messagebox as msg, filedialog as prompt
 
 rootDir = os.path.dirname(os.path.abspath(__file__))
 initDir = os.path.dirname(os.path.abspath(sys.argv[0]))
-if os.name == 'nt':
+osType = os.name
+if osType == 'nt':
     configDir = os.path.join(os.getenv('APPDATA'), "Furglitch", "MO2SG")
     log.info("Windows OS detected")
     log.info(f"Config Directory: {configDir}")
-elif os.name == 'posix':
-    configDir = os.path.join(os.path.expanduser('~'), ".config", "Furglitch", "MO2SG")
+elif osType == 'posix':
+    configDir = os.path.join(os.path.expanduser('~'), ".config", "furglitch", "MO2SG")
     log.info("Linux OS detected")
     log.info(f"Config Directory: {configDir}")
 else:
@@ -18,7 +19,14 @@ else:
     sys.exit(1)
 logDir = os.path.join(configDir, 'logs', f'{dt.now().strftime('%Y-%m-%d %H%M%S')}.log')
 resourceDir = os.path.join(rootDir, "resources")
-iconDir = os.path.join(resourceDir, "icon.ico")
+iconDir = os.path.join(resourceDir, "icon.png")
+
+print(f"Root Directory: {rootDir}")
+print(f"Initial Directory: {initDir}")
+print(f"Config Directory: {configDir}")
+print(f"Log Directory: {logDir}")
+print(f"Resource Directory: {resourceDir}")
+print(f"Icon Directory: {iconDir}")
 
 saved = True
 categories = {}
@@ -27,7 +35,7 @@ startColor = "#000000"
 endColor = "#ffffff"
 gradient = []
 header = 'Bracket'
-theme = 'Nord'
+theme = 'Catppuccin Mocha'
 themeAccent = 'Blue'
 catCasing = 'Unchanged'
 subCasing = 'Unchanged'

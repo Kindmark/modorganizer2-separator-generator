@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import ttk, colorchooser as cc
 import webbrowser as web
 import sys
+from PIL import Image, ImageTk
 
 ui = None
 settings = None
@@ -25,10 +26,12 @@ def closeSettings():
 
 # Main Window
 ui = tk.Tk()
+img = Image.open(bck.iconDir)
+ico = ImageTk.PhotoImage(img)
 ui.title("MO2 Separator Generator")
-ui.iconbitmap(bck.iconDir)
+ui.wm_iconphoto(True, ico)
 ui.geometry("550x525+100+100")
-ui.minsize(550,450)
+ui.minsize(750,500)
 ui.resizable(True, True)
 ui.protocol("WM_DELETE_WINDOW", lambda: closeProgram())
 
@@ -36,8 +39,8 @@ ui.protocol("WM_DELETE_WINDOW", lambda: closeProgram())
 settings = tk.Toplevel(ui)
 settings.withdraw()
 settings.title("Settings")
-settings.iconbitmap(bck.iconDir)
-settings.geometry('230x170')
+settings.wm_iconphoto(True, ico)
+settings.geometry('250x200')
 settings.resizable(False, False)
 
 themeFrame = ttk.Frame(settings, padding=(0,0,10,5))
