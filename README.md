@@ -17,7 +17,7 @@ A tool for creating separators for categorization within Mod Organizer 2, making
 ### Windows
 
 >#### Easy
-> 1. Download the latest [exe release](https://github.com/Furglitch/ModOrganizer-SeparatorGenerator/releases) 
+> 1. Download the latest [release](https://github.com/Furglitch/ModOrganizer-SeparatorGenerator/releases) 
 > 2. Run it!
 >
 >#### Harder - Build It Yourself!
@@ -30,15 +30,18 @@ A tool for creating separators for categorization within Mod Organizer 2, making
 > ```powershell
 > pip install -r requirements.txt
 > ```
-> 3. Build the executable!
+> 3a. Build the executable!
 > ```powershell
 > pyinstaller -n "MO2SG" --onefile -w interface.py backend.py --add-data "resources;resources" -i "resources/icon.ico"
+> ```
+> 3b. Run interface.py
+> ```bash
+> python interface.py
 > ```
 > You will find the executible in the dist folder.
 
 ### Linux
 
-> Unfortunately, I've yet to figure out how to create an executable file from linux
 >
 > 1. Clone the repository and enter it:
 > ```bash
@@ -56,6 +59,9 @@ A tool for creating separators for categorization within Mod Organizer 2, making
 > python interface.py
 > ```
 > Note: There is also an executable `run.sh` file that does this, if you prefer double-clicking.
+>
+> Unfortunately, I've yet to figure out how to create an executable file for Linux.<br>
+> If you prefer one, you can download the [release](https://github.com/Furglitch/ModOrganizer-SeparatorGenerator/releases) and run it with [Wine](https://www.winehq.org/)
 
 ## Settings
 Any changes you make in the settings menu can be saved with the click of a button.</br>
