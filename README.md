@@ -55,6 +55,7 @@ A tool for creating separators for categorization within Mod Organizer 2, making
 > ```bash
 > python interface.py
 > ```
+> Note: There is also an executable `run.sh` file that does this, if you prefer double-clicking.
 
 ## Settings
 Any changes you make in the settings menu can be saved with the click of a button.</br>
