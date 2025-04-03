@@ -161,7 +161,7 @@ def outputGen():
     global gradient
     gradientGet()
     path = prompt.askdirectory()
-    profilePath = os.path.join(path, 'profiles', 'default')
+    profilePath = os.path.join(path, 'profiles', 'Default')
     modsPath = os.path.join(path, 'mods')
     if not os.path.exists(profilePath): os.makedirs(profilePath)
     f = open(profilePath + '/modlist.txt', "w")
