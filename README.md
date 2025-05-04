@@ -63,6 +63,35 @@ A tool for creating separators for categorization within Mod Organizer 2, making
 > Unfortunately, I've yet to figure out how to create an executable file for Linux.<br>
 > If you prefer one, you can download the [release](https://github.com/Furglitch/ModOrganizer-SeparatorGenerator/releases) and run it with [Wine](https://www.winehq.org/)
 
+## Usage
+
+### Interface Breakdown
+- The Menu Bar is for:
+  - Files:
+    - Import and Export of the in-progress settings
+    - Settings tweaks (themeing, category separator styling, automatic text casing)
+  - View:
+    - collapsing and expanding categories
+  - Examples:
+    - Loading preset examples (my personal separator presets)
+  - About:
+    - Links back to the GitHub and a copy of the License.
+- The Category Tree is where you can see your current list, allowing you to adjust as needed using the button bar.
+- The Options Bar contains the various options for 
+  - The left side lets you set the name of your category/subcategory, and which category a subcategory would fall under.
+  - The right side lets you change the gradient, which changes the colors of the category separators, for a nice visual flair to your list.
+- The Button Bar has all your adjustment options.
+  - Move arrows move the separator selected in the category up and down the list. This is respective to their type, and will not move categories into other categories, or subcategories out of their own subcategories.
+  - The 'Add/Remove Separator' buttons do just as they say, add or remove separators to your in-progress list, based on the settings in the left side of the Options Bar.
+  - 'Generate Files' generates the files that need to be added to your MO2 instance root folder. It will allow you to change the output destination.
+
+### IMPORTANT - MUST READ
+- The generated files (a `mods` folder and a `profiles` folder) *must* be placed in the root folder of your MO2 instance, otherwise the changes will not take effect.
+- It is well advised to use this with a **fresh** install of Mod Organizer 2. Using it with an existing MO2 instance will **DESTROY** your current modlist order.
+- If you are insistent on putting it in an existing instance, remove all the folders in the existing `mods` folder that end with `_separator`. For the profiles folder, I'd make a backup of the existing modlist.txt within `/profiles/{PROFILENAME}`. When the new modlist.txt is added, you can copy over the names of the mods from the old txt, or sort them in the MO2 interface.
+- This program generates files for the 'Default' instance profile. If you wish to rename it, change the name of the `Default` folder within the `profiles` folder
+
+
 ## Settings
 Any changes you make in the settings menu can be saved with the click of a button.</br>
 **Windows:** `%APPDATA%/Furglitch/MO2SG`</br>
