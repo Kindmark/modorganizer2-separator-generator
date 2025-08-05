@@ -5,6 +5,9 @@ import webbrowser as web
 import sys
 from PIL import Image, ImageTk
 
+def safe_color(val, default):
+    return val if isinstance(val, str) and val.startswith('#') and len(val) == 7 else default
+
 ui = None
 settings = None
 def closeProgram():
@@ -177,6 +180,163 @@ def updateList():
     updateColor("end", bck.endColor)
     bck.log.info("Updated separator list")
 
+# Context Menu for Separator List
+contextMenu = tk.Menu(separatorList, tearoff=0)
+contextMenu.add_command(label="Edit", command=lambda: openEditPanel())
+
+def showContextMenu(event):
+    selection = separatorList.identify_row(event.y)
+    if selection:
+        separatorList.selection_set(selection)
+        contextMenu.post(event.x_root, event.y_root)
+separatorList.bind("<Button-3>", showContextMenu)
+
+# Edit Panel
+editPanel = ttk.Frame(ui)
+editPanel.pack_forget()
+editGradientPreview = tk.Canvas(editPanel, height=20, width=200, bg='white', highlightthickness=0)
+editGradientPreview.pack(side="top", fill="x", padx=5, pady=2)
+editNameVar = tk.StringVar()
+editStartColorVar = tk.StringVar()
+editEndColorVar = tk.StringVar()
+editNameLabel = ttk.Label(editPanel, text="Edit Name: ", width=18, anchor="w")
+editNameLabel.pack(anchor="w", side="left")
+editNameEntry = ttk.Entry(editPanel, textvariable=editNameVar, width=18)
+editNameEntry.pack(anchor="w", side="left")
+editStartColorLabel = ttk.Label(editPanel, text="Start Color: ", width=10, anchor="w")
+editStartColorLabel.pack(anchor="w", side="left")
+editStartColorEntry = ttk.Entry(editPanel, textvariable=editStartColorVar, width=10)
+editStartColorEntry.pack(anchor="w", side="left")
+editStartColorPreview = tk.Label(editPanel, width=2, height=1, bg=safe_color(editStartColorVar.get(), '#000000'), highlightbackground="gray", highlightthickness=1)
+editStartColorPreview.pack(anchor="w", side="left")
+editStartColorBtn = ttk.Button(editPanel, text="Choose", command=lambda: chooseEditColor('start'), width=7)
+editStartColorBtn.pack(anchor="w", side="left")
+editEndColorLabel = ttk.Label(editPanel, text="End Color: ", width=10, anchor="w")
+editEndColorLabel.pack(anchor="w", side="left")
+editEndColorEntry = ttk.Entry(editPanel, textvariable=editEndColorVar, width=10)
+editEndColorEntry.pack(anchor="w", side="left")
+editEndColorPreview = tk.Label(editPanel, width=2, height=1, bg=safe_color(editEndColorVar.get(), '#ffffff'), highlightbackground="gray", highlightthickness=1)
+editEndColorPreview.pack(anchor="w", side="left")
+editEndColorBtn = ttk.Button(editPanel, text="Choose", command=lambda: chooseEditColor('end'), width=7)
+editEndColorBtn.pack(anchor="w", side="left")
+editSaveBtn = ttk.Button(editPanel, text="Save", command=lambda: saveEditPanel())
+editSaveBtn.pack(anchor="w", side="left")
+editCancelBtn = ttk.Button(editPanel, text="Cancel", command=lambda: editPanel.pack_forget())
+editCancelBtn.pack(anchor="w", side="left")
+
+editPanelItemId = None
+editPanelParentId = None
+
+def openEditPanel():
+    global editPanelItemId, editPanelParentId
+    selection = separatorList.selection()
+    if selection:
+        item_id = selection[0]
+        parent_id = separatorList.parent(item_id)
+        name = separatorList.item(item_id, "values")[0].strip()
+        # Get colors
+        if parent_id:
+            parent_name = separatorList.item(parent_id, "values")[0].strip()
+            start_color = bck.categories[parent_name]["sub"][name].get("startColor", bck.startColor)
+            end_color = bck.categories[parent_name]["sub"][name].get("endColor", bck.endColor)
+        else:
+            start_color = bck.categories[name].get("startColor", bck.startColor)
+            end_color = bck.categories[name].get("endColor", bck.endColor)
+        editNameVar.set(name)
+        editStartColorVar.set(start_color)
+        editEndColorVar.set(end_color)
+        editStartColorPreview.config(bg=start_color)
+        editEndColorPreview.config(bg=end_color)
+        drawEditGradientPreview(start_color, end_color)
+        editPanelItemId = item_id
+        editPanelParentId = parent_id
+        editPanel.pack(side="bottom", fill="x", pady=10)
+        editNameEntry.focus_set()
+
+def chooseEditColor(which):
+    color = cc.askcolor()[1]
+    if color:
+        if which == 'start':
+            editStartColorVar.set(color)
+            editStartColorPreview.config(bg=color)
+        else:
+            editEndColorVar.set(color)
+            editEndColorPreview.config(bg=color)
+        drawEditGradientPreview(editStartColorVar.get(), editEndColorVar.get())
+
+def drawEditGradientPreview(start, end):
+    # Draw a horizontal gradient bar
+    editGradientPreview.delete("all")
+    try:
+        for i in range(200):
+            r1, g1, b1 = int(start[1:3],16), int(start[3:5],16), int(start[5:7],16)
+            r2, g2, b2 = int(end[1:3],16), int(end[3:5],16), int(end[5:7],16)
+            t = i/199
+            r = int(r1 + (r2-r1)*t)
+            g = int(g1 + (g2-g1)*t)
+            b = int(b1 + (b2-b1)*t)
+            color = f'#{r:02x}{g:02x}{b:02x}'
+            editGradientPreview.create_line(i,0,i,20,fill=color)
+    except:
+        pass
+
+def saveEditPanel():
+    global editPanelItemId, editPanelParentId
+    new_name = editNameVar.get().strip()
+    start_color = editStartColorVar.get().strip()
+    end_color = editEndColorVar.get().strip()
+    if not start_color.startswith('#') or len(start_color) != 7:
+        start_color = '#000000'
+        editStartColorVar.set(start_color)
+    if not end_color.startswith('#') or len(end_color) != 7:
+        end_color = '#ffffff'
+        editEndColorVar.set(end_color)
+    if editPanelItemId:
+        old_name = separatorList.item(editPanelItemId, "values")[0].strip()
+        if editPanelParentId:
+            parent_name = separatorList.item(editPanelParentId, "values")[0].strip()
+            # Rename subcategory
+            if new_name != old_name:
+                bck.categories[parent_name]["sub"][new_name] = bck.categories[parent_name]["sub"].pop(old_name)
+            bck.categories[parent_name]["sub"][new_name]["startColor"] = start_color
+            bck.categories[parent_name]["sub"][new_name]["endColor"] = end_color
+            separatorList.item(editPanelItemId, values=(f"\u00A0\u00A0\u00A0\u00A0{new_name}",))
+        else:
+            # Rename category
+            if new_name != old_name:
+                bck.categories[new_name] = bck.categories.pop(old_name)
+            bck.categories[new_name]["startColor"] = start_color
+            bck.categories[new_name]["endColor"] = end_color
+            separatorList.item(editPanelItemId, values=(new_name,))
+        updateList()
+    editPanel.pack_forget()
+    editPanelItemId = None
+    editPanelParentId = None
+
+# Update list backgrounds to show gradient
+old_updateList = updateList
+def updateList():
+    old_updateList()
+    # Apply gradient backgrounds
+    cats = list(bck.categories.keys())
+    n = len(cats)
+    for idx, cat in enumerate(cats):
+        start = bck.categories[cat].get("startColor", bck.startColor)
+        end = bck.categories[cat].get("endColor", bck.endColor)
+        # Calculate color for this position
+        r1, g1, b1 = int(start[1:3],16), int(start[3:5],16), int(start[5:7],16)
+        r2, g2, b2 = int(end[1:3],16), int(end[3:5],16), int(end[5:7],16)
+        t = idx/(max(n-1,1))
+        r = int(r1 + (r2-r1)*t)
+        g = int(g1 + (g2-g1)*t)
+        b = int(b1 + (b2-b1)*t)
+        color = f'#{r:02x}{g:02x}{b:02x}'
+        separatorList.tag_configure(f'catcolor{idx}', background=color)
+        separatorList.item(bck.categories[cat]["id"], tags=(f'catcolor{idx}',))
+        # Subcategories use same color for now
+        for sub_idx, sub in enumerate(bck.categories[cat]["sub"]):
+            separatorList.item(bck.categories[cat]["sub"][sub]["id"], tags=(f'catcolor{idx}',))
+
 # Buttons
 buttonFrame = ttk.Frame(ui)
 ttk.Button(buttonFrame, text="Move ↑", width=7, command=lambda: moveSeparator("up")).pack(side="left", fill="y")
@@ -274,13 +434,17 @@ gradientEndFrame = ttk.Frame(gradientFrame)
 gradientEndFrame.pack(anchor="e", side="bottom")
 startIndicator = tk.Label(gradientStartFrame, bg=startColor.get(), width=2, height=1, highlightbackground="gray", highlightthickness=1)
 startIndicator.pack(anchor="w", side="left")
-startLabel = ttk.Label(gradientStartFrame, text=f"Start Color: {startColor.get()}", width=20)
-startLabel.pack(anchor="center", side="left")
+startEntry = ttk.Entry(gradientStartFrame, textvariable=startColor, width=20)
+startEntry.pack(anchor="center", side="left")
+startEntry.bind('<FocusOut>', lambda e: updateColor("start", startColor.get()))
+startEntry.bind('<Return>', lambda e: updateColor("start", startColor.get()))
 ttk.Button(gradientStartFrame, text="Choose Start Color", command=lambda: chooseColor("start"), width=20).pack(anchor="e", side="left")
 endIndicator = tk.Label(gradientEndFrame, bg=endColor.get(), width=2, height=1, highlightbackground="gray", highlightthickness=1)
 endIndicator.pack(anchor="w", side="left")
-endLabel = ttk.Label(gradientEndFrame, text=f"End Color: {endColor.get()}", width=20)
-endLabel.pack(anchor="center", side="left")
+endEntry = ttk.Entry(gradientEndFrame, textvariable=endColor, width=20)
+endEntry.pack(anchor="center", side="left")
+endEntry.bind('<FocusOut>', lambda e: updateColor("end", endColor.get()))
+endEntry.bind('<Return>', lambda e: updateColor("end", endColor.get()))
 ttk.Button(gradientEndFrame, text="Choose End Color", command=lambda: chooseColor("end"), width=20).pack(anchor="e", side="left")
 def chooseColor(type):
     color = cc.askcolor()[1]
@@ -288,18 +452,20 @@ def chooseColor(type):
         updateColor(type, color)
 
 def updateColor(type, color):
-    if color is None:
+    if color is None or not isinstance(color, str) or not color.startswith('#') or len(color) != 7:
         if type == "start":
             color = "#000000"
+            startColor.set(color)
         elif type == "end":
             color = "#ffffff"
+            endColor.set(color)
     if type == "start":
         startIndicator.config(bg=color)
-        startLabel.config(text=f"Start Color: {color}")
+        startColor.set(color)
         bck.startColor = color
     elif type == "end":
         endIndicator.config(bg=color)
-        endLabel.config(text=f"End Color: {color}")
+        endColor.set(color)
         bck.endColor = color
     bck.gradientGet()
     bck.log.info(f"Updated {type} color to {color}")
@@ -336,15 +502,13 @@ def applyTheme(theme_name, color):
     bck.themeAccent = colorBox.get()
     bck.log.info(f"Applied theme {theme_name} with accent {color}")
     
-    
-
 bck.settingsGet()
 themeBox.set(bck.theme)
 colorBox.set(bck.themeAccent)
 headerBox.set(bck.header)
 casingCatBox.set(bck.catCasing)
 casingSubBox.set(bck.subCasing)
-bck.exampleGet(exampleBar, separatorList, subBox, startIndicator, endIndicator, startLabel, endLabel)
+bck.exampleGet(exampleBar, separatorList, subBox, startIndicator, endIndicator, startEntry, endEntry)
 applyTheme(bck.theme, bck.themeAccent)
 updateHeaderLabel(headerBox.get())
 ui.mainloop()
