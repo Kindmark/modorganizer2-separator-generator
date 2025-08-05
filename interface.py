@@ -284,8 +284,15 @@ endLabel.pack(anchor="center", side="left")
 ttk.Button(gradientEndFrame, text="Choose End Color", command=lambda: chooseColor("end"), width=20).pack(anchor="e", side="left")
 def chooseColor(type):
     color = cc.askcolor()[1]
-    updateColor(type, color)
+    if color is not None:
+        updateColor(type, color)
+
 def updateColor(type, color):
+    if color is None:
+        if type == "start":
+            color = "#000000"
+        elif type == "end":
+            color = "#ffffff"
     if type == "start":
         startIndicator.config(bg=color)
         startLabel.config(text=f"Start Color: {color}")

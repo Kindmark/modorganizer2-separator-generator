@@ -164,10 +164,10 @@ def outputGen():
     profilePath = os.path.join(path, 'profiles', 'Default')
     modsPath = os.path.join(path, 'mods')
     if not os.path.exists(profilePath): os.makedirs(profilePath)
-    f = open(profilePath + '/modlist.txt', "w")
+    f = open(profilePath + '/modlist.txt', "w", encoding="utf-8")
     f.close()
     if not os.path.exists(modsPath): os.makedirs(modsPath)
-    with open(os.path.join(profilePath + '/modlist.txt'), "r+") as l:
+    with open(os.path.join(profilePath + '/modlist.txt'), "r+", encoding="utf-8") as l:
         lines = l.readlines()
         l.seek(0, 0)
         i = 0; j=0
